@@ -42,7 +42,7 @@
       }
       scriptLoaded = true;
       var scriptTag = document.createElement('script');
-      scriptTag.src = 'main.dart.js';
+      scriptTag.src = 'https://apurvaplanet.github.io/flutterchat/main.dart.js';
       scriptTag.type = 'application/javascript';
       document.body.append(scriptTag);
     }
@@ -53,7 +53,7 @@
         // Wait for registration to finish before dropping the <script> tag.
         // Otherwise, the browser will load the script multiple times,
         // potentially different versions.
-        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+        var serviceWorkerUrl = 'https://apurvaplanet.github.io/flutterchat/flutter_service_worker.js?v=' + serviceWorkerVersion;
         navigator.serviceWorker.register(serviceWorkerUrl)
           .then((reg) => {
             function waitForActivation(serviceWorker) {
@@ -113,7 +113,7 @@
 <!-- <script type="text/javascript"
           src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.13/dist/browser-image-compression.js"></script>
   <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script> -->
-  <script src="app.js" defer></script> 
+  <script src="https://apurvaplanet.github.io/flutterchat/app.js" defer></script> 
 <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -161,7 +161,7 @@
     window.flutterWebRenderer = "canvaskit";
   }
 </script>
-<script src="main.dart.js" type="application/javascript"></script>
+<script src="https://apurvaplanet.github.io/flutterchat/main.dart.js" type="application/javascript"></script>
 
 <a id="triggerVideoPlayer" class="afterglow" href="#videoPlayer"></a>
     <video id="videoPlayer" width="960" height="540" data-skin="dark">
