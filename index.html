@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="pntchat">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta name="google-signin-client_id" content="567155440507-19uvr0decc8ti2153e8k91f4pepia5s7.apps.googleusercontent.com">
+  <title>pntchat</title>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.jsdelivr.net/npm/afterglowplayer@1.x"></script>
+
+  
+</head>
+<body>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script>
+    const serviceWorkerVersion = "750291297";
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+
+    if ('serviceWorker' in navigator) {
+      // Service workers are supported. Use them.
+      window.addEventListener('load', function () {
+        // Wait for registration to finish before dropping the <script> tag.
+        // Otherwise, the browser will load the script multiple times,
+        // potentially different versions.
+        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+        navigator.serviceWorker.register(serviceWorkerUrl)
+          .then((reg) => {
+            function waitForActivation(serviceWorker) {
+              serviceWorker.addEventListener('statechange', () => {
+                if (serviceWorker.state == 'activated') {
+                  console.log('Installed new service worker.');
+                  loadMainDartJs();
+                }
+              });
+            }
+            if (!reg.active && (reg.installing || reg.waiting)) {
+              // No active web worker and we have installed or are installing
+              // one for the first time. Simply wait for it to activate.
+              waitForActivation(reg.installing ?? reg.waiting);
+            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
+              // When the app updates the serviceWorkerVersion changes, so we
+              // need to ask the service worker to update.
+              console.log('New service worker available.');
+              reg.update();
+              waitForActivation(reg.installing);
+            } else {
+              // Existing service worker is still good.
+              console.log('Loading app from service worker.');
+              loadMainDartJs();
+            }
+          });
+
+        // If service worker doesn't succeed in a reasonable amount of time,
+        // fallback to plaint <script> tag.
+        setTimeout(() => {
+          if (!scriptLoaded) {
+            console.warn(
+              'Failed to load app from service worker. Falling back to plain <script> tag.',
+            );
+            loadMainDartJs();
+          }
+        }, 4000);
+      });
+    } else {
+      // Service workers not supported. Just drop the <script> tag.
+      loadMainDartJs();
+    }
+  </script>
+
+<!-- <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script> -->
+
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"  type="application/javascript"></script>
+
+<!-- <script type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.13/dist/browser-image-compression.js"></script>
+  <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script> -->
+  <script src="app.js" defer></script> 
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyASe-BGBCTv3NIGzCNi4u6L9-4lrnFdC_k",
+    authDomain: "pntchat-869f2.firebaseapp.com",
+    databaseURL:"https://pntchat-869f2.firebaseapp.com",
+    projectId: "pntchat-869f2",
+    storageBucket: "pntchat-869f2.appspot.com",
+    messagingSenderId: "567155440507",
+    appId: "1:567155440507:web:345cb994b4e059944ddbde",
+    // measurementId: "G-BMQW5H4QNV"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const storageRef = firebase.storage().ref();
+
+  // Retrieve firebase messaging
+  // const messaging = firebase.messaging();
+  //   messaging.onBackgroundMessage(function(payload) {
+  //     console.log('Received background message ', payload);
+  //     const notificationTitle = payload.notification.title;
+  //     const notificationOptions = {body: payload.notification.body,};
+  //     self.registration.showNotification(notificationTitle,notificationOptions);
+  //   });
+ 
+
+  //   if('serviceWorker' in navigator) {
+  //         navigator.serviceWorker.register('../firebase-messaging-sw.js')
+  //       .then(function(registration) {
+  //        console.log("Service Worker Registered");
+  //       messaging.useServiceWorker(registration);
+  //         });
+  //         }
+
+
+</script>
+
+<script type="text/javascript">
+  let useHtml = true;
+  if(useHtml) {
+    window.flutterWebRenderer = "html";
+  } else {
+    window.flutterWebRenderer = "canvaskit";
+  }
+</script>
+<script src="main.dart.js" type="application/javascript"></script>
+
+<a id="triggerVideoPlayer" class="afterglow" href="#videoPlayer"></a>
+    <video id="videoPlayer" width="960" height="540" data-skin="dark">
+    </video>
+</body>
+</html>
